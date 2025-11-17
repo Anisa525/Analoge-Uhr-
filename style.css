@@ -30,47 +30,30 @@ body {
     0 0 25px rgba(0, 0, 0, 0.5);
 }
 
+/* Trapezoid / red shape on the right side */
 .clock::after {
   content: "";
   position: absolute;
-  top: 23%;
-  /* minimal nach oben verschoben */
-  right: 10%;
-  /* Abstand vom rechten Rand */
+  top: 23%;          /* slightly shifted up */
+  right: 10%;        /* distance from the right edge */
   width: 20%;
-  height: 55%;
-  /* minimal länger als vorher */
-  background: #ec0a0a80;
+  height: 55%;       /* slightly longer than before */
+  background: #ec0a0a80;  /* semi-transparent red */
   z-index: 2;
 
-  /* Trapez mit schrägen Linien oben und unten, rechte Seite rund */
-  clip-path: polygon(0% 10%,
-      /* linke obere Spitze */
-      80% 0%,
-      /* obere rechte Ecke */
-      100% 50%,
-      /* rechte Mitte */
-      80% 100%,
-      /* untere rechte Ecke */
-      0% 90%
-      /* linke untere Spitze */
-    );
+  /* Trapezoid with slanted top and bottom lines, rounded right side */
+  clip-path: polygon(
+    0% 10%,    /* left top tip */
+    80% 0%,    /* top right corner */
+    100% 50%,  /* right middle */
+    80% 100%,  /* bottom right corner */
+    0% 90%     /* left bottom tip */
+  );
 
-  /* Rechte Seite stärker abrunden */
+  /* Make the right side more rounded */
   border-top-right-radius: 70%;
   border-bottom-right-radius: 70%;
 }
-
-
-
-
-
-
-
-
-
-
-
 
 .inner-clock-face {
   position: absolute;
@@ -83,12 +66,7 @@ body {
   z-index: 1;
 }
 
-
-
-
-
-
-/* Zentraler Punkt in der Mitte der Uhr */
+/* Central point in the middle of the clock */
 .inner-clock-face::before {
   content: '';
   position: absolute;
@@ -106,40 +84,33 @@ body {
 .hand {
   width: 50%;
   right: 50%;
-  height: 6px;
-  /* Standardhöhe für alle Zeiger */
+  height: 6px;          /* standard height for all hands */
   background: black;
   position: absolute;
   top: 50%;
-  /* WICHTIG: Dreht den Zeiger um das Ende an der 50%-Marke */
+  /* IMPORTANT: rotate the hand around the end at the 50% mark */
   transform-origin: 100%;
-  transform: rotate(90deg);
-  /* Initial 90 Grad, damit er nach oben zeigt, bevor JS greift */
+  transform: rotate(90deg); /* initial 90 degrees so it points up before JS updates */
   border-radius: 6px;
-  transition: all 0.05s cubic-bezier(0, 0, 0.1, 1);
-  /* Sanfter Übergang */
+  transition: all 0.05s cubic-bezier(0, 0, 0.1, 1); /* smooth transition */
 }
 
 .hour-hand {
-  width: 40%;
-  /* vorher 25% → jetzt länger */
+  width: 40%;           /* previously 25%, now longer */
   height: 8px;
   background: #a70d0d;
-  top: calc(50% - 4px);
-  /* bleibt zentriert */
+  top: calc(50% - 4px); /* keeps it centered */
 }
 
 .min-hand {
-  width: 60%;
-  /* vorher 35% → länger */
+  width: 60%;           /* previously 35%, now longer */
   height: 6px;
   background: #b32626;
   top: calc(50% - 3px);
 }
 
 .second-hand {
-  width: 70%;
-  /* vorher 40% → länger */
+  width: 70%;           /* previously 40%, now longer */
   height: 2px;
   background: red;
   top: calc(50% - 1px);
